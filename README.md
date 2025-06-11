@@ -58,6 +58,17 @@ cd horoscope
 $ npm install
 ```
 
+#Generate RSA Keys Using OpenSSL
+```bash
+# Generate RSA key pair for JWT (RS256)
+mkdir -p keys && \
+openssl genrsa -out keys/private.key 2048 && \
+openssl rsa -in keys/private.key -pubout -out keys/public.key
+```
+Update key paths in .env as JWT_PRIVATE_KEY_PATH and JWT_PUBLIC_KEY_PATH.
+
+
+
 # Environment Setup
 
 ## Create a .env file using the example as reference:
