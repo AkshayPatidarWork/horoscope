@@ -26,48 +26,114 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+# 🔮 Personalized Horoscope API
+
+A NestJS-based backend service that generates and serves personalized daily horoscopes for users based on their zodiac sign. This project demonstrates modular backend architecture, JWT authentication, and basic rate-limiting, with optional data persistence.
+
+GitHub Repository: [https://github.com/AkshayPatidarWork/horoscope.git](https://github.com/AkshayPatidarWork/horoscope.git)
+
+---
+
+## ✅ Features
+
+- User Signup & Login with JWT Authentication
+- Auto-detection of Zodiac Sign during Signup
+- Fetch Today's Horoscope based on Zodiac Sign
+- Retrieve History of Last 7 Days' Horoscopes
+- Rate-limited API (5 requests/min per user)
+- Swagger API Documentation
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AkshayPatidarWork/horoscope.git
+cd horoscope
+```
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+# Environment Setup
+
+## Create a .env file using the example as reference:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+cp .env.example .env
 ```
 
-## Test
+# 🚀 Running the App
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start
 ```
 
-## Support
+# Access API Documentation
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+http://0.0.0.0:3000
+```
 
-## Stay in touch
+#💡 Design Decisions
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 1. NestJS Framework
 
-## License
+Chosen for its modular architecture, TypeScript support, and scalable project structure.
 
-Nest is [MIT licensed](LICENSE).
+### 2. JWT Authentication
+
+Used for secure, stateless auth. The user's zodiac sign is embedded in the JWT payload to avoid redundant calculations or lookups.
+
+### 3. Zodiac Sign Detection
+
+Automatically derived during signup via a simple birthdate-to-zodiac utility function.
+
+### 4. Horoscope Storage
+
+In-memory JSON used to mock daily horoscopes per zodiac for fast prototyping without external dependencies.
+
+### 5. PostgreSQL Database
+
+Selected for structured data storage, strong consistency, and ACID compliance. Supports unique constraints on (user_id, date) in horoscope_history, ensuring only one entry per day per user even under multiple requests.
+
+### 6. Rate Limiting
+
+Throttling applied with NestJS's ThrottlerModule to prevent API abuse (max 5 reqs/min per user).
+
+### 7. Swagger Documentation
+
+Integrated with @nestjs/swagger to auto-generate and serve live API docs.
+
+# 🛠️ Improvements with More Time
+
+### 1 Third-Party Horoscope Integration
+
+Replace static data with live content from a trusted horoscope API for more personalized experiences.
+
+### 2 Redis Caching for Horoscope Content
+
+Cache third-party horoscope data by zodiac and date to minimize latency and external calls while keeping content fresh with TTL.
+
+### 3 Cached Zodiac Sign in JWT
+
+Embedding the zodiac sign in JWT enables instant lookups without DB or re-calculation. Today's result can be auto-added to history if not already stored, avoiding duplicate writes.
+
+### 4 Timezone-Aware Scheduling
+
+Allow users to view horoscopes based on their local timezone for better personalization.
+
+### 5 Admin Features
+
+Build a dashboard to track usage trends, user activity, system health, and content engagement.
+
+# 👨‍💻 Author
+
+Akshay Patidar
+
+# 📜 License
+
+Nest is MIT licensed.
