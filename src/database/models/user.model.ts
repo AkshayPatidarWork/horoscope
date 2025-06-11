@@ -1,4 +1,10 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  CreatedAt,
+} from 'sequelize-typescript';
 
 @Table
 export class User extends Model<User> {
@@ -32,4 +38,7 @@ export class User extends Model<User> {
     allowNull: false,
   })
   zodiacSign: string;
+
+  @CreatedAt
+  createdAt: Date;
 }

@@ -34,6 +34,7 @@ export class SignupDto {
     description: 'Date of birth (ISO format)',
     example: '1996-07-15',
   })
+  @IsNotEmpty()
   @IsDateString(
     {},
     { message: 'Birthdate must be a valid date string (e.g., 1996-07-15)' },

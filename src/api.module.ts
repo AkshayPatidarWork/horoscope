@@ -10,10 +10,13 @@ import { HoroscopeModule } from './horoscope/horoscope.module';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { JwtModule } from './common/guards/jwt.module';
 import { ConfigModule } from './config/config.module';
+import { ThrottlerGuard } from '@nestjs/throttler';
+import { RateLimiterModule } from './common/rate-limiter/rate-limiter.module';
 
 @Module({
   imports: [
     ConfigModule,
+    RateLimiterModule,
     JwtModule,
     DatabaseModule,
     UserModule,
@@ -36,6 +39,10 @@ import { ConfigModule } from './config/config.module';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })

@@ -13,12 +13,16 @@ export const configuration = () => {
     dbPassword: process.env.DB_PASSWORD || '',
     dbName: process.env.DB_NAME || 'horoscope',
     dbSSL: dbSSLRaw === 'true',
+
     jwtPrivateKey: process.env.JWT_PRIVATE_KEY || '',
     jwtPublicKey: process.env.JWT_PUBLIC_KEY || '',
     jwtExpiry: process.env.JWT_EXPIRY || '1d',
     jwtIssuer: process.env.JWT_ISSUER || 'horoscope-api',
     jwtAlgorithm: process.env.JWT_ALGORITHM || 'RS256',
     jwtRefreshExpiry: process.env.JWT_REFRESH_EXPIRY || '7d',
+
+    throttleTimeout: process.env['THROTTLE_TTL'] || '60',
+    throttleLimit: process.env['THROTTLE_LIMIT'] || '5',
 
     logLevel: process.env.LOG_LEVEL || 'DEBUG',
   };

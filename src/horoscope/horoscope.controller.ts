@@ -1,34 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { HoroscopeService } from './horoscope.service';
-import { CreateHoroscopeDto } from './dto/create-horoscope.dto';
-import { UpdateHoroscopeDto } from './dto/update-horoscope.dto';
-
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
+@ApiTags('dashboard')
+@ApiBearerAuth('token')
 @Controller('horoscope')
 export class HoroscopeController {
   constructor(private readonly horoscopeService: HoroscopeService) {}
-
-  @Post()
-  create(@Body() createHoroscopeDto: CreateHoroscopeDto) {
-    return this.horoscopeService.create(createHoroscopeDto);
+  @UseGuards(JwtAuthGuard)
+  @Throttle({ default: { limit: 5, ttl: 6000 } })
+  @Get('today')
+  getToday(@Req() req) {
+    return this.horoscopeService.getToday(req.user);
   }
 
-  @Get()
-  findAll() {
-    return this.horoscopeService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.horoscopeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHoroscopeDto: UpdateHoroscopeDto) {
-    return this.horoscopeService.update(+id, updateHoroscopeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.horoscopeService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  @Get('history')
+  getHistory(@Req() req) {
+    return this.horoscopeService.getHistory(req.user);
   }
 }

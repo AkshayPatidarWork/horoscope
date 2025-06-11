@@ -1,42 +1,36 @@
-// src/horoscope/horoscope-history.model.ts
-
 import {
-  Table,
   Column,
-  Model,
+  CreatedAt,
   DataType,
   ForeignKey,
+  Model,
+  Table,
   BelongsTo,
+  Index,
 } from 'sequelize-typescript';
 import { User } from './user.model';
 
-@Table
+@Table({
+  tableName: 'horoscope_history',
+})
 export class HoroscopeHistory extends Model<HoroscopeHistory> {
   @ForeignKey(() => User)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
+  @Index('unique_user_date') // Composite index
+  @Column
   userId: number;
 
   @BelongsTo(() => User)
   user: User;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  zodiacSign: string;
-
+  @Index('unique_user_date')
   @Column({
     type: DataType.DATEONLY,
-    allowNull: false,
   })
-  date: Date;
+  date: string;
 
-  @Column({
-    type: DataType.TEXT,
-    allowNull: false,
-  })
-  content: string;
+  @Column(DataType.TEXT)
+  description: string;
+
+  @CreatedAt
+  createdAt: Date;
 }

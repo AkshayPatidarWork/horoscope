@@ -72,7 +72,7 @@ export class AuthService {
 
     // JWT payload
     const payload = {
-      sub: user.id,
+      id: user.id,
       email: user.email,
       name: user.name,
       zodiacSign: user.zodiacSign,
