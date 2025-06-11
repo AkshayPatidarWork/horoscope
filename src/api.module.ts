@@ -1,7 +1,6 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE, APP_GUARD } from '@nestjs/core';
-import { ConfigModule } from '@nestjs/config';
-import { JwtModule } from '@nestjs/jwt';
+// import { ConfigModule } from '@nestjs/config';
 
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
@@ -9,15 +8,14 @@ import { AuthModule } from './auth/auth.module';
 import { HoroscopeModule } from './horoscope/horoscope.module';
 
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
+import { JwtModule } from './common/guards/jwt.module';
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule,
+    JwtModule,
     DatabaseModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'yourSecretKey',
-      signOptions: { expiresIn: '3h' },
-    }),
     UserModule,
     AuthModule,
     HoroscopeModule,

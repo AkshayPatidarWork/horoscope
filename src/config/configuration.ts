@@ -13,7 +13,6 @@ export const configuration = () => {
     dbPassword: process.env.DB_PASSWORD || '',
     dbName: process.env.DB_NAME || 'horoscope',
     dbSSL: dbSSLRaw === 'true',
-
     jwtPrivateKey: process.env.JWT_PRIVATE_KEY || '',
     jwtPublicKey: process.env.JWT_PUBLIC_KEY || '',
     jwtExpiry: process.env.JWT_EXPIRY || '1d',

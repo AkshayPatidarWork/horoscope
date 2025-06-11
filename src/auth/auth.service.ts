@@ -20,17 +20,23 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
+  /**
+   * Handle user signup
+   */
   async signup(signupDto: SignupDto) {
     const { name, email, password, birthdate } = signupDto;
 
+    // Check if user already exists
     const existingUser = await this.userService.findByEmail(email);
     if (existingUser) {
       throw new ConflictException('Email is already registered.');
     }
 
+    // Hash password and determine zodiac sign
     const hashedPassword = await toHash(password);
     const zodiacSign = getZodiacSign(birthdate);
 
+    // Create new user
     const newUser = await this.userService.create({
       name,
       email,
@@ -46,19 +52,25 @@ export class AuthService {
     };
   }
 
+  /**
+   * Handle user login
+   */
   async login(loginDto: LoginDto) {
     const { email, password } = loginDto;
 
+    // Find user
     const user = await this.userService.findByEmailWithPassword(email);
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
 
+    // Check password
     const isPasswordValid = await checkHash(password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid email or password');
     }
 
+    // JWT payload
     const payload = {
       sub: user.id,
       email: user.email,
@@ -66,7 +78,14 @@ export class AuthService {
       zodiacSign: user.zodiacSign,
     };
 
-    const accessToken = this.jwtService.sign(payload);
+    const expiresIn = this.configService.get<string>('jwtExpiry') || '3h';
+    const issuer =
+      this.configService.get<string>('jwtIssuer') || 'horoscope-api';
+
+    const accessToken = this.jwtService.sign(payload, {
+      expiresIn,
+      issuer,
+    });
 
     return {
       success: true,
