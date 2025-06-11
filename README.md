@@ -130,6 +130,19 @@ Allow users to view horoscopes based on their local timezone for better personal
 
 Build a dashboard to track usage trends, user activity, system health, and content engagement.
 
+## 📸 Sample
+<p align="center">
+  <img src="https://drive.google.com/file/d/1RDYUUdmsSZDvuZQStIYFjfRFGQfW691U/view?usp=drive_link" width="600" />
+</p>
+
+<p align="center">
+  <img src="https://drive.google.com/file/d/1bD7zCZYA-hG4T4QSAghFSzjSzHhUfRS_/view?usp=drive_link" width="600" />
+</p>
+
+<p align="center">
+  <img src="https://drive.google.com/file/d/10Qeky1_Wa8MxN3YKHsVEXAEdIELQ1g7p/view?usp=drive_link" width="600" />
+</p>
+
 # 👨‍💻 Author
 
 Akshay Patidar
