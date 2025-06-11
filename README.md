@@ -121,23 +121,33 @@ Integrated with @nestjs/swagger to auto-generate and serve live API docs.
 
 # 🛠️ Improvements with More Time
 
-### 1 Third-Party Horoscope Integration
+### 1 🔐 Secure Login Flow
+Email verification on signup
+
+OTP-based email verification using a mailer service (e.g., Nodemailer or Resend)
+
+🔁 Forgot & Reset Password Functionality
+"Forgot Password" request via email
+
+Secure reset link with expiration and token validation
+
+### 2 Third-Party Horoscope Integration
 
 Replace static data with live content from a trusted horoscope API for more personalized experiences.
 
-### 2 Redis Caching for Horoscope Content
+### 3 Redis Caching for Horoscope Content
 
 Cache third-party horoscope data by zodiac and date to minimize latency and external calls while keeping content fresh with TTL.
 
-### 3 Cached Zodiac Sign in JWT
+### 4 Cached Zodiac Sign in JWT
 
 Embedding the zodiac sign in JWT enables instant lookups without DB or re-calculation. Today's result can be auto-added to history if not already stored, avoiding duplicate writes.
 
-### 4 Timezone-Aware Scheduling
+### 5 Timezone-Aware Scheduling
 
 Allow users to view horoscopes based on their local timezone for better personalization.
 
-### 5 Admin Features
+### 6 Admin Features
 
 Build a dashboard to track usage trends, user activity, system health, and content engagement.
 
