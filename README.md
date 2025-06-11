@@ -141,8 +141,9 @@ Build a dashboard to track usage trends, user activity, system health, and conte
 
 
 <p align="center">
-  <img src="https://drive.google.com/uc?export=view&id=1bD7zCZYA-hG4T4QSAghFSzjSzHhUfRS_" width="600" />
+  <img src="https://drive.google.com/uc?export=view&id=10Qeky1_Wa8MxN3YKHsVEXAEdIELQ1g7p" width="600" />
 </p>
+
 
 
 # 👨‍💻 Author
